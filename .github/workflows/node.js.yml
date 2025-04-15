@@ -3,11 +3,10 @@ name: Run Tests with Server
 on:
   push:
     branches:
-      - main
-      - dev
+      - "**"
   pull_request:
     branches:
-      - main
+      - "**"
 
 jobs:
   test:
@@ -17,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensure Jest can compare against origin/main
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -33,7 +32,7 @@ jobs:
         working-directory: MSN
 
       - name: Wait for Server to Start
-        run: sleep 10  # Adjust port if needed
+        run: sleep 10
 
       - name: Build
         run: npm run build --if-present
